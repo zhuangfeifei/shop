@@ -1,0 +1,143 @@
+
+.vux-rater-inner{
+    font-size: 8vw!important; text-align: center!important;
+}
+.vux-rater-box{
+    width: 7vw!important; text-align: center!important;
+}
+
+
+.weui-toast{
+    width: 35vw!important; height: 35vw!important; font-size: 4vw;
+}
+.weui-toast p{
+    width: 35vw; font-size: 4vw; margin-top: 5vw!important; 
+}
+.weui-toast i{
+    width: 10vw!important; height: 10vw!important; margin-top: 5vw!important; margin: 0 auto;
+}
+
+#jianjie img{
+    width: 50vw!important; height: 30vw;
+}
+
+.ht img{
+    width: 100%!important;
+}
+
+/*.van-tabs__nav-wrap{
+    width: 100vw!important; max-width: 100vw;
+}*/
+.van-tab{
+    max-width: 20vw; font-size: 4.2vw;
+}
+.van-tabs__nav-bar{
+    width: 20vw;
+}
+/*.van-hairline--bottom::after, .van-hairline--left::after, .van-hairline--right::after, .van-hairline--surround::after, .van-hairline--top-bottom::after, .van-hairline--top::after, .van-hairline::after{
+    width: 100%;
+}*/
+
+
+
+.amap-sug-result{
+	max-width: 65vw!important;
+}
+.auto-item{
+	font-size: 4vw!important; line-height: 5vw; border-bottom: 0.3vw solid gainsboro; padding: 2vw;
+}
+h3{
+    margin-top: 1.5vw; 
+}
+.amap_lib_placeSearch .poibox .poi-title{
+    font-size: 4vw;
+}
+.amap_lib_placeSearch .poibox .poi-info p{
+    font-size: 3.5vw
+}
+.amap_lib_placeSearch_page{
+    height: 10vw;
+}
+.amap_lib_placeSearch .pageLink,.amap_lib_placeSearch_page>div>p{
+    font-size: 4.5vw; line-height: 9vw; margin-left: 3vw;
+}
+a:hover{    
+    text-decoration: none;   
+}    
+.amap-copyright,.amap-logo{
+    display: none!important;
+}
+.amap-touch-toolbar .amap-zoomcontrol{
+    bottom: -12vw; right: 0vw; background: rgba(0, 0, 0, 0)
+}
+.amap-pl-pc .poi-img{
+    margin-top: 2.5vw;
+}
+.amap_lib_placeSearch.mobile .pageLink{
+    border:0; background-color: #e5ecf9; color: black
+}
+
+.van-radio{
+    width: 50vw;line-height: 8vw; margin-left: 4vw;
+}
+
+
+
+
+
+/*.amap-geolocation-con{
+	display: none;
+}
+.amap-call{
+	color: blue!important;
+}*/
+
+
+
+
+
+.van-toast--default{
+    width: 36vw; height: 36vw;
+}
+.van-toast{
+    top: 40%; 
+}
+.van-toast--default .van-toast__text{
+    font-size: 4vw;
+}
+
+
+
+/*优惠卷*/
+.van-coupon-list--with-exchange{
+    padding-top: 5vw; height: 70vh;
+}
+.van-coupon-list__filed,.van-cell-group>.van-button{
+    display: none;
+}
+.van-cell-group{
+    width: 100%; padding: 0;
+}
+.van-cell{
+    width: 100%; font-size: 4vw;
+}
+.van-cell__value--link,.van-icon-arrow:before{
+    position: relative; left: 3vw
+}
+.van-hairline>.van-cell__value,.van-hairline>.van-icon{
+    color: red!important;
+}
+
+
+.van-dialog{
+    top: 45%;
+}
+.van-dialog__message--withtitle{
+    text-align: center;
+}
+
+
+
+.van-toast__text{
+    text-align: center;
+}

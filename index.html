@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"  http-equiv="Access-Control-Allow-Origin" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>扑满商城</title>
+		<!--<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>-->
+		<script type="text/javascript" src="http://cache.amap.com/lbs/static/PlaceSearchRender.js"></script>
+    <!--<script src="//webapi.amap.com/ui/1.0/main-async.js"></script>-->
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+		<script type="text/javascript" src="http://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+		<link rel="stylesheet" href="http://at.alicdn.com/t/font_497277_6juko23xpsr1kyb9.css">
+  </head> 
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script>
+    	//设置HTML字体    rem
+    	function fontSize(){
+    		var deviceWidth = document.documentElement.clientWidth;
+    		if(deviceWidth > 600){
+    			deviceWidth = 600 ;
+    		}
+    		document.documentElement.style.fontSize = deviceWidth / 100 + 'px'
+    	}
+    	fontSize()
+    	window.onresize = function(){
+    		fontSize()
+    	}
+			
+			
+			var wxhs = 'puman2016'
+			var openId = 'oLCKIwOtSoGIY6AE5iMe4U1oW-iA'
+			// var wxhs = '{wxh}'
+    	// var openId = '{openId}'
+			function isObject(val) {
+					return val !== null && typeof val === 'object'
+			}
+			function setStore(key, val, type = 'localStorage') {
+					if (isObject(val)) window[type].setItem(key, JSON.stringify(val))
+					else window[type].setItem(key, val)
+			}
+			setStore('wx',wxhs)
+			setStore('openIds',openId)
+    </script>
+  </body>
+</html>

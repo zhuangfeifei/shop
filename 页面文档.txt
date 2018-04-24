@@ -1,0 +1,13 @@
+Home : 首页
+Restaurant : 餐厅
+Classification : 餐馆分类
+Details : 商品详情
+Placeorder : 提交订单
+Buy : 立刻购买
+position : 位置
+Shoppingcart : 购物车
+Payment : 确认支付
+Complete : 支付完成
+Evaluate : 立即评价
+Orderdetails : 订单详情
+Myorder : 我的订单

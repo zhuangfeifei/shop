@@ -1,0 +1,67 @@
+.weui-toast{
+    width: 35vw!important; height: 35vw!important; font-size: 4vw;
+}
+.weui-toast p{
+    width: 35vw; font-size: 4vw; margin-top: 3vw!important;
+}
+.weui-toast i{
+    width: 10vw!important; height: 10vw!important; margin-top: 5vw!important;
+}
+
+.weui-cells{
+    width: 12vw; height: 10vw; margin-left: -3vw!important; padding-right: 2vw;
+}
+.weui-cells:before,.weui-cells:after{
+    border: none;
+}
+#asd .weui-cells_checkbox .weui-icon-checked:before{
+    font-size: 6vw; color: red;
+}
+#asd .weui-cells{
+    width: 12vw; height: 10vw; margin-left: 0vw!important;
+}
+.vux-rater-inner{
+    font-size: 6vw;
+}
+/*日期*/
+/*.dp-container{
+    width: 100%; height: 50vh;
+}
+.dp-header{
+    height: 6.5vh; 
+    border-bottom: 0.3vw solid gainsboro;
+}
+.dp-item{
+    font-size: 4.5vw!important;
+}
+.dp-content{
+    border: 0.3vw solid red; 
+    height: 100%;
+}
+.scroller-component{
+    border: 0.3vw solid red; height: 100%!important;
+}
+.scroller-item{
+    font-size: 4.5vw!important;
+}
+
+.scroller-indicator{
+    border-bottom: 0.3vw solid gainsboro;border-top: 0.3vw solid gainsboro;
+}
+
+.scroller-content{
+    height: 100%!important;
+}
+.dp-content>div{
+     height: 100%;
+}*/
+
+.van-swipe__indicators .van-swipe__indicator--active{
+    background-color: white;
+}
+
+
+
+.van-dialog__message{
+    text-align: center!important; font-weight: 600;
+}

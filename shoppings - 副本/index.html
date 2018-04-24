@@ -1,0 +1,25 @@
+<!DOCTYPE html><html><head><meta charset=utf-8 http-equiv=Access-Control-Allow-Origin name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><title>扑满商城</title><script type=text/javascript src=http://cache.amap.com/lbs/static/PlaceSearchRender.js></script><script src=http://res.wx.qq.com/open/js/jweixin-1.2.0.js></script><link rel=stylesheet href=http://at.alicdn.com/t/font_497277_22qa376qz0rdaemi.css><link href=http://www.homeamc.cn:8088/shopping/static/wx/static/css/app.cd4fc14825e8ac75dc534c7090aa0617.css rel=stylesheet></head><body><div id=app></div><script>//设置HTML字体    rem
+    	function fontSize(){
+    		var deviceWidth = document.documentElement.clientWidth;
+    		if(deviceWidth > 600){
+    			deviceWidth = 600 ;
+    		}
+    		document.documentElement.style.fontSize = deviceWidth / 100 + 'px'
+    	}
+    	fontSize()
+    	window.onresize = function(){
+    		fontSize()
+    	}
+			
+			
+			var wxhs = 'puman2016'
+			var openId = 'oLCKIwOtSoGIY6AE5iMe4U1oW-iA'
+			function isObject(val) {
+					return val !== null && typeof val === 'object'
+			}
+			function setStore(key, val, type = 'localStorage') {
+					if (isObject(val)) window[type].setItem(key, JSON.stringify(val))
+					else window[type].setItem(key, val)
+			}
+			setStore('wx',wxhs)
+			setStore('openIds',openId)</script><script type=text/javascript src=http://www.homeamc.cn:8088/shopping/static/wx/static/js/manifest.ff8a11885380d48f5f70.js></script><script type=text/javascript src=http://www.homeamc.cn:8088/shopping/static/wx/static/js/app.791e63d40bf4856bca17.js></script></body></html>
