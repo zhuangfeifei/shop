@@ -182,7 +182,7 @@
 @import '../../assets/lies.css';
 @import '../../assets/vux.1.css';
 .yuyue{
-    width: 100%; padding-top: 15vw; height: 100vh; overflow: hidden;
+    width: 100%; padding-top: 15vw; height: 100vh; overflow: hidden; 
 }
 /*顶部*/
 #nav{

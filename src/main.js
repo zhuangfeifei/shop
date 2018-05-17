@@ -71,6 +71,13 @@ Vue.component(Cell.name,Cell);
 Vue.component(CellGroup.name,CellGroup);
 
 
+import VueLazyLoad from 'vue-lazyload'
+Vue.use(VueLazyLoad,{
+    // error:'../static/error.png',
+    loading:'../static/placeholder.gif'
+})
+
+
 import AMap from 'vue-amap'
 Vue.use(AMap)
 AMap.initAMapApiLoader({

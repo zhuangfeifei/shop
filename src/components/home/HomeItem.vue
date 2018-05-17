@@ -37,7 +37,7 @@
                 <van-swipe id="shop_fenglei">
                     <van-swipe-item class="zileis" v-for="(items, indexs) in fenleis" :key="indexs">
                         <div class="zilei" @click="Fenlei(index)" v-for="(item,index) in items" :key="index">
-                            <div><img :src="imgUrl + item.tinyPic" alt=""></div>
+                            <div><img v-lazy="imgUrl + item.tinyPic" alt=""></div>
                             <span>{{item.categoryName}}</span>
                         </div>
                     </van-swipe-item>
@@ -56,73 +56,24 @@
                 <img src="../../assets/img/home/shop_you.png" alt="">
             </div>
 
+            <a href="http://www.yfcanshi.com/wx/home/index.html"><img id="yfcanshi" src="../../assets/img/home/Life.png" alt=""></a>
+
             <div class="vip">
                 <div class="vip_top"><img src="../../assets/img/home/vip_top1.png" alt=""></div>
                 <div class="vip_name">
                     <div class="vip_names">
-                        <div>
-                            <router-link :to="{path:'Nian',query:{name:'vip_name4',shop:'苏桃李音乐酒馆'}}">
-                                <img src="../../assets/img/home/vip_name4.png" alt="">
+                        <div v-for="(item,index) in list" :key="index">
+                            <router-link :to="{path:'Nian',query:{name:item.name,shop:item.shop}}">
+                                <img v-lazy="item.img" alt="">
                             </router-link>
                         </div>
-                        <div>
-                            <router-link :to="{path:'Nian',query:{name:'vip_name1',shop:'苏浙徽农家大院'}}">
-                                <img src="../../assets/img/home/vip_name1.png" alt="">
-                            </router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{path:'Nian',query:{name:'vip_name5',shop:'英派斯健身'}}">
-                                <img src="../../assets/img/home/vip_name5.png" alt="">
-                            </router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{path:'Nian',query:{name:'vip_name6',shop:'福田家国际月子会所'}}">
-                                <img src="../../assets/img/home/vip_name6.png" alt="">
-                            </router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{path:'Nian',query:{name:'vip_name7',shop:'瑶池丽水温泉会馆'}}">
-                                <img src="../../assets/img/home/vip_name7.png" alt="">
-                            </router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{path:'Nian',query:{name:'vip_name8',shop:'肯幸顿酒庄'}}">
-                                <img src="../../assets/img/home/vip_name8.png" alt="">
-                            </router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{path:'Nian',query:{name:'vip_name9',shop:'江南正一堂'}}">
-                                <img src="../../assets/img/home/vip_name9.png" alt="">
-                            </router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{path:'Nian',query:{name:'vip_name10',shop:'老妈米线'}}">
-                                <img src="../../assets/img/home/vip_name10.png" alt="">
-                            </router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{path:'Nian',query:{name:'vip_name11',shop:'5D光影涮烤吧'}}">
-                                <img src="../../assets/img/home/vip_name11.png" alt="">
-                            </router-link>
-                        </div>
-                        <div>
-                            <router-link :to="{path:'Nian',query:{name:'vip_name12',shop:'迈家众创'}}">
-                                <img src="../../assets/img/home/vip_name12.png" alt="">
-                            </router-link>
-                        </div>
-                        <!--<div>
-                            <img src="../../assets/img/home/vip_name3.png" alt="">
-                        </div>
-                        <div>
-                            <img src="../../assets/img/home/vip_name2.png" alt="">
-                        </div>-->
                         
                     </div>
                 </div>
                 <div class="vip_top1"><img src="../../assets/img/home/vip_jingxuan.png" alt=""></div>
                 <div class="Selected">
                     <div v-for="(item,index) in datanew" :key="index">
-                        <img @click="Jingxuan(index)" :src="imgUrl + item.cover" >
+                        <img @click="Jingxuan(index)" v-lazy="imgUrl + item.cover" >
                     </div>
                 </div>
             </div>
@@ -145,6 +96,18 @@ export default {
                 require('../../assets/img/home/kuang1.png'),require('../../assets/img/home/kuang2.png'),
                 require('../../assets/img/home/kuang3.png'),require('../../assets/img/home/kuang5.png'),
                 require('../../assets/img/home/kuang4.png')
+            ],
+            list:[
+                {name:'vip_name4',shop:'苏桃李音乐酒馆',img:require('../../assets/img/home/vip_name4.png')},
+                {name:'vip_name1',shop:'苏浙徽农家大院',img:require('../../assets/img/home/vip_name1.png')},
+                {name:'vip_name5',shop:'英派斯健身',img:require('../../assets/img/home/vip_name5.png')},
+                {name:'vip_name6',shop:'福田家国际月子会所',img:require('../../assets/img/home/vip_name6.png')},
+                {name:'vip_name7',shop:'瑶池丽水温泉会馆',img:require('../../assets/img/home/vip_name7.png')},
+                {name:'vip_name8',shop:'肯幸顿酒庄',img:require('../../assets/img/home/vip_name8.png')},
+                {name:'vip_name9',shop:'江南正一堂',img:require('../../assets/img/home/vip_name9.png')},
+                {name:'vip_name10',shop:'老妈米线',img:require('../../assets/img/home/vip_name10.png')},
+                {name:'vip_name11',shop:'5D光影涮烤吧',img:require('../../assets/img/home/vip_name11.png')},
+                {name:'vip_name12',shop:'迈家众创',img:require('../../assets/img/home/vip_name12.png')},
             ],
             xuehua:'',qwe:0,
             swiperOption: {//以下配置不懂的，可以去swiper官网看api，链接http://www.swiper.com.cn/api/
@@ -176,7 +139,7 @@ export default {
     swiperSlide
     },
     mounted(){
-
+        
         document.body.scrollTop = 0
         document.documentElement.scrollTop = 0
 
@@ -501,6 +464,10 @@ a{
     img:nth-child(5){
         width: 4vw; height: 5vw; border-radius: 50%; position: relative; top: 3vw;
     }
+}
+
+#yfcanshi{
+    width: 90%; height: 40vw; margin-top: 5vw; margin-left: 5%;
 }
 
 .vip{

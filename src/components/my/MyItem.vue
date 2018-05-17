@@ -253,7 +253,7 @@ export default {
     font-size: 5vw; line-height: 15vw;
 }
 .header>span:nth-child(1){
-    position: relative; left: 5vw;
+    position: relative; left: 3vw;
 }
 .header>a>span{
     float: right; position: relative; right: 3vw; font-size: 5vw;

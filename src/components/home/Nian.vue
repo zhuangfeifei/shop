@@ -27,6 +27,16 @@ export default {
 
         this.imgs = require('../../assets/img/home/'+this.$route.query.name+'s.png')
         this.title = this.$route.query.shop
+        // $(document).ready(()=>{
+        //     $('.fa').on('click',()=>{
+        //         console.log(1)
+        //         history.go(-1)
+        //     })
+        // })
+        
+    },
+    mounted(){
+        
     },
     methods:{
         history() {
@@ -37,7 +47,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .home{
-    width: 100%; padding-top: 12vw;
+    width: 100%; padding-top: 15vw;
     padding-bottom: 10vw;
     // background: url('../../assets/img/home/diwen@2x.png') no-repeat; background-size: 100% 95%;
     // background-color: #002531;
