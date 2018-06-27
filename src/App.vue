@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <v-Loading v-if="Loadings"></v-Loading>
   </div>
 </template>
 
 <script>
+import Loading from "./Loading"
 export default {
   name: 'app',
   data(){
@@ -12,15 +14,16 @@ export default {
 
     }
   },
+  components:{
+    'v-Loading': Loading
+  },
+  computed:{
+    Loadings(){
+      return this.$store.state.SET_LOADING
+    }
+  },
   created(){
-    // this.$axios.interceptors.request.use((config) => {
-    //   console.log("请求前拦截！");
-    //   // alert('开始请求')
-    //   return config;
-    // }, (err) => {
-    //   return Promise.reject(err);
-    // });
-
+    
 
     // this.$axios.post('/fangyuanli/DemoApi/oftenGoods.php')
     //   .then(response => {

@@ -160,7 +160,7 @@ export default {
             }
             // console.log(shop)
             this.$store.commit('shangPings',shop)
-            this.$router.push({path:'Payment1'})
+            this.$router.push({path:'Payment1',query:{order:shop}})
         },
         didScroll() {
             var allHeight = this.$(document).scrollTop() + this.$(window).height();

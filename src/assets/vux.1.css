@@ -141,3 +141,13 @@ a:hover{
 .van-toast__text{
     text-align: center;
 }
+
+
+/*日期*/
+.weui-cell{padding: 0!important}
+.main_input_data .vux-calendar:before{ 
+    border-top: 0!important;
+}
+.main_input_data .weui-cell__ft{
+    color: rgba(255,139,75,1)!important; font-weight: 500!important;
+}

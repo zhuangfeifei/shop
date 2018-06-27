@@ -37,7 +37,7 @@ export default {
 #nav{
     width: 100%; height: 15vw; font-size: 5vw;
     position: fixed; top: 0; color: white; z-index: 1000;
-    background-color: black; border-bottom: 0.3vw solid gainsboro;
+    background-color: black;
 }
 #nav .header{
     width: 100%; height: 100%;

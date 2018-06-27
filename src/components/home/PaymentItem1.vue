@@ -62,8 +62,7 @@ export default {
         document.body.scrollTop = 0
         document.documentElement.scrollTop = 0
         this.data = this.$route.query.order
-        // console.log(this.$route.query.order)
-        // console.log(wx)
+        // console.log(this.data)
     },
     methods:{
         history() {

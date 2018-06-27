@@ -3,8 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import axios from 'axios'
-Vue.prototype.$axios = axios
+// import axios from 'axios'
+import { httpUrl } from "./api.js"
+Vue.prototype.$axios = httpUrl.api
+Vue.prototype.$httpUrl = httpUrl
 
 import jQuery from 'jquery'
 Vue.prototype.$ = jQuery
@@ -31,9 +33,6 @@ import store from './vuex/store'
 Vue.prototype.$store = store
 import storage from './vuex/storage'
 Vue.prototype.$storage = storage
-
-import { httpUrl } from "./api.js"
-Vue.prototype.$httpUrl = httpUrl
 
 
 import { Swipe, SwipeItem } from 'vant'
@@ -69,6 +68,9 @@ Vue.component(CouponList.name,CouponList);
 import { Cell, CellGroup } from 'vant';
 Vue.component(Cell.name,Cell);
 Vue.component(CellGroup.name,CellGroup);
+import { NoticeBar } from 'vant';
+Vue.component(NoticeBar.name,NoticeBar);
+
 
 
 import VueLazyLoad from 'vue-lazyload'

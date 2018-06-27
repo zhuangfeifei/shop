@@ -34,6 +34,7 @@ import Orderdetails from '@/Home/Orderdetails'
 import Myorder from '@/Home/Myorder'
 // 年
 import Nian from '@/components/home/Nian'
+import Notice from '@/components/home/Notice'
 
 // 我的
 import My from '@/my/My'
@@ -65,6 +66,11 @@ import Join from '@/my/Join'
 import Opencard from '@/my/Opencard'
 // 优惠卷详情
 import Detailscoupond from '@/my/Detailscoupond'
+
+import layer from '@/components/home/layer'
+import shop from '@/components/home/shop'
+import game from '@/components/home/game'
+import Integralshop from '@/components/my/Integralshop'
 
 
 Vue.use(Router)
@@ -225,6 +231,31 @@ export default new Router({
             name: "detailscoupond",
             path: '/detailscoupond',
             component: Detailscoupond 
+        },
+        { //
+            name: "layer",
+            path: '/layer',
+            component: layer 
+        },
+        { //
+            name: "shop",
+            path: '/shop',
+            component: shop 
+        },
+        { //
+            name: "game",
+            path: '/game',
+            component: game 
+        },
+        { //
+            name: "Integralshop",
+            path: '/Integralshop',
+            component: Integralshop 
+        },
+        { //
+            name: "Notice",
+            path: '/Notice',
+            component: Notice 
         },
     ]
 })

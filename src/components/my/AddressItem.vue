@@ -32,7 +32,7 @@
         </div>
 
         <!--<router-link to="/Newaddress">-->
-            <button @click="xinzen" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus">
+            <button @click="xinzen" type="button" class="btn"><span class="glyphicon glyphicon-plus">
                 </span>&nbsp;&nbsp;新建地址
             </button>
         <!--</router-link>-->
@@ -174,8 +174,7 @@
 #nav{
     width: 100%; height: 15vw;
     position: fixed; top: 0;
-    background-color: white;
-    border-bottom: 0.3vw solid gainsboro;
+    background-color: black; color: white
 }
 #nav .header{
     width: 100%; height: 100%;
@@ -185,7 +184,7 @@
 .fa-angle-left{
     float: left; margin-left: 5vw;
     font-size: 10vw;
-    line-height: 14vw; color: black
+    line-height: 14vw;
 }
 #nav .header span{
     margin-left: -8vw;
@@ -232,8 +231,8 @@
     font-size: 4vw;
 }
 .btn{
-    position: fixed; bottom: 5vw;
-    width: 80%; height: 12vw; border-radius: 10vw;
+    position: fixed; bottom: 5vw; background-color: black;
+    width: 80%; height: 12vw; border-radius: 10vw; color: white;
     margin-left: 10%; font-size: 4.6vw;
 }
 a:focus{

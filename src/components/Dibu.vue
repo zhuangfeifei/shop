@@ -67,10 +67,10 @@ nav a{
 	width: 20vw; text-align: center; padding-top: 1vw;
 }
 i{
-	font-size: 5.5vw;
+	font-size: 5.5vw; height: 7vw;
 }
 p{
-	font-size: 3.5vw; margin-top: -1vw; padding: 0;
+	font-size: 3.5vw; 
 }
 
 

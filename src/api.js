@@ -1,9 +1,73 @@
+import axios from 'axios'
+import store from './vuex/store'
+
 let localhostDev = true
 let host = localhostDev ? '/Shop' : 'http://www.homeamc.cn'
+
+const api = axios.create();
+api.defaults.timeout = 5000;
+api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+// 请求拦截
+api.interceptors.request.use(function (config) {
+    // console.log(config)
+    // 在发送请求之前做些什么
+    store.commit('SET_LOADING',true)
+
+    return config
+
+  }, function (error) {
+    
+    alert('网络错误,请稍后再试')
+
+    store.commit('SET_LOADING',false)
+
+    return Promise.reject(error)
+})
+
+// 添加响应拦截器
+api.interceptors.response.use(function (response) {
+    // console.log(response)
+    // setTimeout(()=>{
+      store.commit('SET_LOADING',false)
+    // },500)
+
+    if(response.data.message === "无效token") {
+      // router.replace({path: 'login'})
+    }
+
+    return response;
+
+  }, function (error) {
+    
+      store.commit('SET_LOADING',false)
+    
+    if(errore.response) {
+
+      if(error.response.status== 401) {
+          // 如果返回401 即没有权限，跳到登录页重新登录
+        // store.commit('CHANGE_TOKEN',0);
+
+        alert('请重新登录');
+
+        router.replace({
+          path: 'login',
+          query: {redirect: router.currentRoute.fullPath}
+        })
+
+      }
+    }
+
+    return Promise.reject(error)
+})
 let httpUrl = {
+    
+    api:api,
+
     'dev': host,
     'build': 'http://www.homeamc.cn',
     'build1': 'http://192.168.1.224:8080',
+
+    'games': localhostDev ? '../../../static/games/index.html' : 'http://www.homeamc.cn/shopping/static/wx/static/games/index.html',
 
     'imgUrls': host + '/shopping/kaptcha/',                                 // 图片路径 
     'imgUrls1': host + '/shopping/kaptcha/comment/',  
@@ -100,8 +164,20 @@ let httpUrl = {
 
     'addCustomerCard': host + '/shopping/api/card/addCustomerCard',         // 绑定会员卡
 
+    'addIntegration': host + '/shopping/api/card/addIntegration',           // 积分
+
+    'allNotice': host + '/shopping/notice/allNotice',                       // 获取所有的已读及未读通知
+
+    'allIsNotRead': host + '/shopping/notice/allIsNotRead',                 // 获取所有的未读通知
+
+    'changReadStatus': host + '/shopping/notice/changReadStatus',           // 改变阅读状态
+
+    'getBalance': host + '/shopping/api/comment/getBalance',                // 获取余额
+
     // 我的
     'user': host + '/shopping/api/comment/user',                            // 获取用户信息
+
+    'editUserInfo': host + '/shopping/api/customer/editUserInfo',           // 更新用户信息
 
     'phone': host + '/shopping/api/bind/phone',                             // 绑定手机号
 

@@ -8,7 +8,7 @@
             </div>
         </nav>
         
-        <div class="juan">
+        <!--<div class="juan">
              <div class="ka">
                 <div class="yuan">FYL</div>
                 <div>
@@ -16,6 +16,10 @@
                     <p>VIP会员</p>
                 </div>
              </div>
+        </div>-->
+
+        <div class="logo">
+            <img src="../../assets/img/my/logo@2x.png" alt="">
         </div>
         
         <div class="shouji">
@@ -44,33 +48,12 @@
 		name: "loginpassword-item",
         data(){
             return{
-                sendMsgDisabled:false,time:60,checked:false,vipid:''
+                sendMsgDisabled:false,time:60,checked:false,vips:'',imgUrl:''
             }
         },
         created(){
-            this.$axios.post(this.$httpUrl.getInfo,$.param({ access_type:'WXH5', wxh:wxhs, openId:openId }))
-            .then(response => {
-                // console.log(response.data)
-                if (response.data.code == 200) {
-                    this.vipid = response.data.data.id
-                } else {
-                    this.$vux.loading.show({
-                        text: response.data.message
-                    })
-                    setTimeout(() => {
-                        this.$vux.loading.hide()
-                    }, 3000)
-                }
-            })
-            .catch(error => {
-                // console.log(error)
-                this.$vux.loading.show({
-                    text: '服务器异常'
-                })
-                setTimeout(() => {
-                    this.$vux.loading.hide()
-                }, 3000)
-            })
+            this.imgUrl = this.$httpUrl.imgUrls
+            this.vips = this.$storage.getStore('user')
         },
         methods: {
             history() {
@@ -124,7 +107,7 @@
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.code == 200) {
-                        this.vip()
+                        this.addIntegration()
                     } else {
                         this.$vux.loading.show({
                             text: response.data.message
@@ -143,19 +126,18 @@
                         }, 3000)
                 })
             },
-            vip(){
-                this.$axios.post(this.$httpUrl.addCustomerCard,$.param({access_type:'WXH5', wxh:wxhs, openId:openId,
-                    cardid:this.vipid
-                }))
+            addIntegration(){
+                this.$axios.post(this.$httpUrl.addIntegration,$.param({access_type:'WXH5', wxh:wxhs, openId:openId, type:1 }))
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.code == 200) {
                         this.$vux.toast.show({
-                            text: '开通成功'
+                            text: '开卡成功'
                         })
                         setTimeout(() => {
                             this.$vux.loading.hide()
-                        }, 3000)
+                            this.$router.push({path:'Join'})
+                        }, 2000)
                     } else {
                         this.$vux.loading.show({
                             text: response.data.message
@@ -178,7 +160,7 @@
 	}
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 @import '../../assets/lies.css';
 @import '../../assets/vux.1.css';
 .yuyue{
@@ -188,8 +170,7 @@
 #nav{
     width: 100%; height: 15vw;
     position: fixed; top: 0; z-index: 1000;
-    background-color: white;
-    border-bottom: 1px solid gainsboro;
+    background-color: black; color: white;
 }
 #nav .header{
     width: 100%; height: 15vw;
@@ -199,7 +180,7 @@
 .fa-angle-left{
     float: left; margin-left: 5vw;
     font-size: 10vw;
-    line-height: 14vw; color: black
+    line-height: 14vw;
 }
 #nav .header span{
     margin-left: -8vw;
@@ -208,6 +189,15 @@
 }
 #nav>img{
     margin-top: -5vw; width: 100%;
+}
+
+
+
+.logo{
+    width: 20vw; height: 20vw; margin: 10vw auto; border-radius: 50%; background: rgba(206,206,206,1);
+    img{
+        width: 100%; height: 100%;
+    }
 }
 
 
@@ -267,6 +257,6 @@ input:-moz-placeholder{
 
 .btn{
     width: 90%; height: 12vw; background-color: #ff8b4b; outline: none!important;
-    position: relative; top: 20vw; left: 5%; color: white; font-size: 4.5vw; border-radius: 7vw;
+    position: relative; top: 20vw; left: 5%; color: white; font-size: 4.5vw; border-radius: 1vw;
 }
 </style>

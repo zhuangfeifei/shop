@@ -45,33 +45,43 @@
             </div>
 
             
-            <div class="shop_toutiao">
-                <img src="../../assets/img/home/shop_toutiao.png" alt="">
-                <img src="../../assets/img/home/shop_shuxian.png" alt="">
-                <img src="../../assets/img/home/shop_touxiang.png" alt="">
-                <div>
-                    <span>全新铺满商城</span><br>
-                    <span>期待您的光临</span>
-                </div>
-                <img src="../../assets/img/home/shop_you.png" alt="">
+            <div class="shop_toutiao" @click="tu">
+                <!--<van-notice-bar class="toutiaos" background="white" :speed="80">全新铺满商城  期待您的光临！</van-notice-bar>-->
+                <van-notice-bar v-if="allNotice" class="toutiaos" background="white" :speed="80">{{allNotice}}</van-notice-bar>
+                <van-notice-bar v-else class="toutiaos" background="white" :speed="80">全新铺满商城  期待您的光临！</van-notice-bar>
+                <img src="../../assets/img/home/商城radio@2x.png" alt="">
+                <!--<span>全新铺满商城  期待您的光临！</span>-->
             </div>
 
             <a href="http://www.yfcanshi.com/wx/home/index.html"><img id="yfcanshi" src="../../assets/img/home/Life.png" alt=""></a>
 
+            <router-link to="/game"><img id="kupao" src="../../assets/img/home/小兔快跑2@2x.png" alt=""></router-link>
+
             <div class="vip">
-                <div class="vip_top"><img src="../../assets/img/home/vip_top1.png" alt=""></div>
+                <div class="vip_top"><img src="../../assets/img/home/黄线@2x.png" alt=""><span>会员专享</span><p>尽享贴心特权服务</p></div>
                 <div class="vip_name">
-                    <div class="vip_names">
+                    <p>会员专区  特权享不停</p>
+                    <van-swipe id="shop_vip">
+                        <van-swipe-item class="shops" v-for="(items, indexs) in list" :key="indexs">
+                            <div class="shops_item" v-for="(item,index) in items.a" :key="index">
+                                <router-link :to="{path:'Nian',query:{name:item.name,shop:item.shop}}">
+                                    <div><img  v-lazy="item.img" alt=""><p class="item_name">{{item.shop}}</p></div>
+                                </router-link>
+                            </div>
+                        </van-swipe-item>
+                    </van-swipe>
+                    <!--<div class="vip_names">
                         <div v-for="(item,index) in list" :key="index">
                             <router-link :to="{path:'Nian',query:{name:item.name,shop:item.shop}}">
                                 <img v-lazy="item.img" alt="">
                             </router-link>
                         </div>
                         
-                    </div>
+                    </div>-->
                 </div>
-                <div class="vip_top1"><img src="../../assets/img/home/vip_jingxuan.png" alt=""></div>
+                <div class="vip_top1"><img src="../../assets/img/home/黄线@2x.png" alt=""><span>精选品牌</span><p>随时随地&nbsp;&nbsp;  想购就GO</p></div>
                 <div class="Selected">
+                    <p>精品商店   一手掌握</p>
                     <div v-for="(item,index) in datanew" :key="index">
                         <img @click="Jingxuan(index)" v-lazy="imgUrl + item.cover" >
                     </div>
@@ -90,7 +100,7 @@ import { Loading } from 'vux'
 export default {
     data(){
         return{
-            imgUrl:'',data:'',datanew:'',fenleis:'',currents:1,limit:10,loading:false,dibu:1,
+            imgUrl:'',data:'',datanew:'',fenleis:'',currents:1,limit:10,loading:false,dibu:1,allNotice:'',
             active: 0,time:['00','00','00'],timeInterval:'',
             back:[
                 require('../../assets/img/home/kuang1.png'),require('../../assets/img/home/kuang2.png'),
@@ -98,16 +108,17 @@ export default {
                 require('../../assets/img/home/kuang4.png')
             ],
             list:[
-                {name:'vip_name4',shop:'苏桃李音乐酒馆',img:require('../../assets/img/home/vip_name4.png')},
+                {a:[{name:'vip_name4',shop:'苏桃李音乐酒馆',img:require('../../assets/img/home/vip_name4.png'),},
                 {name:'vip_name1',shop:'苏浙徽农家大院',img:require('../../assets/img/home/vip_name1.png')},
                 {name:'vip_name5',shop:'英派斯健身',img:require('../../assets/img/home/vip_name5.png')},
-                {name:'vip_name6',shop:'福田家国际月子会所',img:require('../../assets/img/home/vip_name6.png')},
-                {name:'vip_name7',shop:'瑶池丽水温泉会馆',img:require('../../assets/img/home/vip_name7.png')},
-                {name:'vip_name8',shop:'肯幸顿酒庄',img:require('../../assets/img/home/vip_name8.png')},
                 {name:'vip_name9',shop:'江南正一堂',img:require('../../assets/img/home/vip_name9.png')},
+                // {name:'vip_name6',shop:'福田家国际月子会所',img:require('../../assets/img/home/vip_name6.png')},
+                {name:'vip_name7',shop:'瑶池丽水温泉会馆',img:require('../../assets/img/home/vip_name7.png')},
+                {name:'vip_name8',shop:'肯幸顿酒庄',img:require('../../assets/img/home/vip_name8.png')}]},
+                {a:[
                 {name:'vip_name10',shop:'老妈米线',img:require('../../assets/img/home/vip_name10.png')},
                 {name:'vip_name11',shop:'5D光影涮烤吧',img:require('../../assets/img/home/vip_name11.png')},
-                {name:'vip_name12',shop:'迈家众创',img:require('../../assets/img/home/vip_name12.png')},
+                {name:'vip_name12',shop:'迈家众创',img:require('../../assets/img/home/vip_name12.png')}]}
             ],
             xuehua:'',qwe:0,
             swiperOption: {//以下配置不懂的，可以去swiper官网看api，链接http://www.swiper.com.cn/api/
@@ -167,10 +178,6 @@ export default {
                     $(this).carousel(startX > endX ? 'next' : 'prev')
                 }
             })
-
-            var w = 33*10+11*5
-            $('.vip_names').css('width',''+w+'vw')
-
         })
 
         
@@ -190,9 +197,26 @@ export default {
                 // this.datanew.push(response.data.data[0])
                 // console.log(bubbleSort(response.data.data))
                 $(document).ready(()=>{
-                    var kuandu = 25
-                    $('.Selected').css('height',''+(kuandu * Math.ceil(response.data.data.length / 3))+'vw')
+                    var kuandu = 26
+                    $('.Selected').css('height',''+(kuandu * Math.ceil(response.data.data.length / 3) - 9)+'vw')
                 })
+            }
+        })
+        .catch(error => {
+            // console.log(error)
+            this.$vux.loading.show({
+                text: '服务器异常'
+            })
+            setTimeout(() => {
+                this.$vux.loading.hide()
+            },3000)
+        })
+        this.$axios.post(this.$httpUrl.allIsNotRead)
+        .then(response => {
+            // console.log(response.data)
+            if(response.data.code == 200){
+                if(response.data.data.length > 0) this.allNotice = response.data.data[0].CONTENT
+                // this.$store.commit('notices',response.data.data)
             }
         })
         .catch(error => {
@@ -217,8 +241,10 @@ export default {
         }
     },
     methods:{
+        tu(){
+            this.$router.push({path:'/Notice',query:{allNotice:this.allNotice}})
+        },
         qwes(){
-            this.$router.push({path:'Nian'})
         },
         opstion(){
             this.$router.push({path:'Position'})
@@ -237,8 +263,18 @@ export default {
             .then(response => {
                 // console.log(response.data)
                 if(response.data.code == 200){
-                    this.data = response.data.data
-                    // this.xue()
+                    var list = response.data.data
+                    function compare(property){
+                        return function(a,b){
+                            var value1 = a[property];
+                            var value2 = b[property];
+                            return value1 - value2;
+                        }
+                    }
+                    var s = list.sort(compare('step'))
+                    var b = s
+                    b.push(s[0])
+                    this.data = b
                 }
             })
             .catch(error => {
@@ -313,7 +349,7 @@ export default {
 
 
 .homes{
-    padding-bottom: 10vw; background-color: #E0E0E0; font-size: 4vw;
+    padding-bottom: 20vw; background-color: white; font-size: 4vw;
 }
 
 header{
@@ -444,65 +480,68 @@ a{
 
 
 .shop_toutiao{
-    width: 100%; height: 25vw; display: flex; justify-content: space-around; background-color: white; margin-top: 3vw;
-    padding: 7vw 3vw 0 4vw;
-    img:nth-child(1){
-        width: 14vw; height: 10vw;
+    width: 100%; height: 15vw;background-color: white; position: relative; padding-right: 1.5vw;
+    img{
+        width: 28vw; height: 6vw; position: absolute; top: 3.5vw; left: 5vw;
     }
-    img:nth-child(2){
-        width: 0.3vw; height: 10vw;
-    }
-    img:nth-child(3){
-        width: 11vw; height: 11vw; border-radius: 50%;
-    }
-    div{
-        width: 40%;
-        span:nth-child(1){
-            font-weight: 600; letter-spacing: 0.3vw;
-        }
-    }
-    img:nth-child(5){
-        width: 4vw; height: 5vw; border-radius: 50%; position: relative; top: 3vw;
+    .toutiaos{
+        width: 100%; position: relative; top: 2vw; padding-left: 35vw; font-size: 4vw;
     }
 }
 
 #yfcanshi{
-    width: 90%; height: 40vw; margin-top: 5vw; margin-left: 5%;
+    width: 90%; height: 40vw; margin-top: 2vw; margin-left: 5%;
+}
+#kupao{
+    width: 90%; height: 22vw; margin: 5vw 5%;
 }
 
 .vip{
     width: 100%; margin-top: 3vw;
     .vip_top,.vip_top1{
-        width: 100%; height: 35vw; background: url('../../assets/img/home/vip_top.png') no-repeat;
-        background-size: 100% 100%; text-align: center;
+        width: 100%; text-align: center; line-height: 6vw; position: relative; letter-spacing: 1vw;
+        color:rgba(75,75,75,1); font-family:PingFang-SC-Regular; font-size: 3.5vw;
+        span{font-family:PingFang-SC-Bold; color:rgba(43,43,43,1); font-weight: Bold; font-size: 5vw; letter-spacing: 0.5vw;}
         img{
-            width: 70%; height: 25vw; margin-top: 5vw;
+            width: 45%; height: 5vw; position: absolute; top: 0vw; left: 27.5%;
         }
     }
     .vip_name{
-        width: 100%; margin: 5vw 0; overflow-x: auto;
-        .vip_names{
-            height: 50vw;
-            div{
-                width: 33vw; height: 100%; float: left; margin-left: 5vw;
-                img{
-                    width: 100%; height: 100%;
+        width: 90%; margin: 5vw auto; border-radius:1.5vw; box-shadow:0px 0px 16px rgba(0,0,0,0.2); padding-top: 5vw; 
+        p{font-family:PingFang-SC-Medium; font-weight: Medium; color:rgba(234,22,22,1); font-size: 4vw; line-height: 8vw; margin-left: 3%;}
+        #shop_vip{
+            width: 100%!important;
+            .shops{
+                width: 100%; padding-bottom: 5vw;
+                .shops_item{
+                    width: 29.35%!important; height: 38vw; float: left; margin-left: 3%;
+                    img{
+                        width: 100%; height: 100%;
+                    }
+                    .item_name{ color: black!important; line-height: 5vw; margin-top: 1vw; font-size: 3.5vw;}
                 }
-            } 
+            }
         }
+        // .vip_names{
+        //     height: 50vw;
+        //     div{
+        //         width: 33vw; height: 100%; float: left; margin-left: 5vw;
+        //         img{
+        //             width: 100%; height: 100%;
+        //         }
+        //     } 
+        // }
     }
+    .vip_top1{ margin-top: 8vw;}
     .Selected{
-        width: 100%; margin-bottom: 20vw;
+        width: 90%; margin: 0 auto; border-radius:1.5vw; box-shadow:0px 0px 16px rgba(0,0,0,0.2); font-size: 4vw; padding-top: 5vw; margin-top: 6vw;
+        p{font-family:PingFang-SC-Medium; font-weight: Medium; color:rgba(234,22,22,1); line-height: 8vw; margin-left: 3%; margin-bottom: 0;}
         div{
-            width: 26.6vw; height: 25vw; float: left; margin-left: 5vw; margin-top: 3vw; background-color: #E0E0E0;
+            width: 25%; height: 23vw; float: left; margin-top: 3vw; background-color: #E0E0E0; border-radius: 3vw;
             img{
                 width: 100%; height: 100%; border-radius: 3vw;
             }
         }
-    }
-    .vip_top1{
-        background: url('../../assets/img/home/vip_jin.png') no-repeat;
-        background-size: 100% 100%;
     }
 }
 

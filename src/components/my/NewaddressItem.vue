@@ -39,7 +39,7 @@
                     <input type="text" class="form-control" id="firstname1" placeholder="详细地址">
                 </div>
                 <!--<router-link to="Address">-->
-                    <button @click="tianjia" type="button" class="btn btn-primary">保存</button>
+                    <button @click="tianjia" type="button" class="btn">保存</button>
                 <!--</router-link>-->
             </form>
             <van-checkbox class="mr" v-model="checked" :change="changes(checked)">设为默认地址</van-checkbox>
@@ -221,8 +221,7 @@
 #nav{
     width: 100%; height: 15vw;
     position: fixed; top: 0;
-    background-color: white; z-index: 10000;
-    border-bottom: 0.3vw solid gainsboro;
+    background-color: black; z-index: 10000; color: white;
 }
 #nav .header{
     width: 100%; height: 100%;
@@ -232,7 +231,7 @@
 .fa-angle-left{
     float: left; margin-left: 5vw;
     font-size: 10vw;
-    line-height: 15vw; color: black
+    line-height: 15vw;
 }
 #nav .header span{
     margin-left: -8vw;
@@ -285,7 +284,7 @@ label{
 }
 .btn{
     position: absolute; bottom: 10vw; outline: none!important;
-    width: 80%; height: 12vw; border-radius: 10vw;
+    width: 80%; height: 12vw; border-radius: 10vw; background-color: black; color: white;
     margin-left: 10%; font-size: 4.6vw;
 }
 .allmap{

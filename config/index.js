@@ -11,6 +11,7 @@ module.exports = {
     index: path.resolve(__dirname, '../shop/index.html'),
     assetsRoot: path.resolve(__dirname, '../shop'),
     assetsSubDirectory: 'static',
+    // assetsPublicPath: './',
     assetsPublicPath: 'http://www.homeamc.cn/shopping/static/wx/',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
@@ -33,7 +34,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       "/Shop":{
-    		// target:"http://192.168.1.137:8088",
+    		// target:"http://192.168.1.193:8090",
         target:"http://192.168.1.79",
     		changeOrigin: true,
     		pathRewrite: {

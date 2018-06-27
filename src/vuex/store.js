@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
+        SET_LOADING:'',
         count: 1,
         token: '',
         html:'',
@@ -19,9 +20,14 @@ const store = new Vuex.Store({
         shangPing:'',
         mapname:'',
         mapphone:'',
-        mapdizhi:''
+        mapdizhi:'',
+        vipCode:'',
+        notice:''
     },
     mutations: {
+        SET_LOADING(state, s) {
+            state.SET_LOADING = s
+        },
         add(state, n) {
             state.count += n
         },
@@ -66,6 +72,12 @@ const store = new Vuex.Store({
         },
         mapdizhis(state, s) {
             state.mapdizhi = s
+        },
+        vipCodes(state, s) {
+            state.vipCode = s
+        },
+        notices(state, s) {
+            state.notice = s
         },
     },
     getters: {

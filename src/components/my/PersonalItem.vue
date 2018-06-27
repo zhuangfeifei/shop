@@ -205,9 +205,8 @@ import { Loading, XButton} from 'vux'
 #nav{
     width: 100%; height: 15vw;
     position: fixed; top: 0;
-    background-color: white;
-    border-bottom: 0.3vw solid gainsboro;
-}
+    background-color: black; color: white;
+ }
 #nav .header{
     width: 100%; height: 100%;
     text-align: center;
@@ -216,7 +215,7 @@ import { Loading, XButton} from 'vux'
 .fa-angle-left{
     float: left; margin-left: 5vw;
     font-size: 10vw;
-    line-height: 15vw; color: black
+    line-height: 15vw;
 }
 #nav .header span{
     margin-left: -8vw;

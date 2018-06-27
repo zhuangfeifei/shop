@@ -8,7 +8,7 @@
             </div>
         </nav>
         
-        <div class="content">
+        <div class="content_coupon">
             <div class="titles">
                 <p class="tixian3" id="shopName">
                     <span>{{data.shopName}}</span>
@@ -125,8 +125,7 @@
 #nav{
     width: 100%; height: 15vw;
     position: fixed; top: 0; z-index: 1000;
-    background-color: white;
-    border-bottom: 1px solid gainsboro;
+    background-color: black; color: white;
 }
 #nav .header{
     width: 100%; height: 15vw;
@@ -136,7 +135,7 @@
 .fa-angle-left{
     float: left; margin-left: 5vw;
     font-size: 10vw;
-    line-height: 14vw; color: black
+    line-height: 14vw;
 }
 #nav .header span{
     margin-left: -8vw;
@@ -148,7 +147,7 @@
 
 
 
-.content{
+.content_coupon{
     width: 95%; height: 95%; margin: 1.5vw auto; padding-top: 5vw; padding-bottom: 6vw;
     background: url("../../assets/img/my/youhuiquan@2x.png") no-repeat; background-size: 100% 100%;
 }
