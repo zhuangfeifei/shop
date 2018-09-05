@@ -101,7 +101,7 @@ import { Loading, XButton, XSwitch} from 'vux'
             showLoading() {
                 this.$axios.post(this.$httpUrl.logout,$.param({ access_type:'WXH5', wxh: this.$storage.getStore('wx'), openId:this.$storage.getStore('openIds')}))
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
                     if (response.data.code == 200) {
                         this.$vux.loading.show({
                             text: '成功退出'

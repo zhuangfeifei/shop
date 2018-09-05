@@ -13,9 +13,9 @@
                 </div>
                 <div class="wxName">
                     <div class="pName">{{data.nickname}}</div>
-                    <router-link v-if="data.phonenumber == ''" to="/Join"> <div class="vip"><span>成为会员</span><img src="../../assets/img/my/按钮_成为会员@2x.png" alt=""></div></router-link>
+                    <router-link v-if="data.phonenumber == ''" to="/Opencard"> <div class="vip"><span>成为会员</span><img src="../../assets/img/my/按钮_成为会员@2x.png" alt=""></div></router-link>
                     <router-link v-else to="/Join"> <div class="vip"><span>{{vip_name}}</span></div></router-link>
-                    <div><span>当前余额：{{balance || 0}}</span></div>
+                    <div v-if="data.phonenumber != ''"><span>当前余额：{{balance || 0}}</span></div>
                 </div>
                 <div class="qiandao" @click="Sign">签到</div>
             </div>
@@ -26,7 +26,7 @@
         <router-link to="/Myorder"><div class="Order"><img src="../../assets/img/my/我的订单@2x.png" alt=""></div></router-link>
 
         <div class="My_main">
-            <router-link to=""><div class="pay"><img src="../../assets/img/my/图标_停车缴费@2x.png" alt=""><span>停车缴费</span><br><span>parking payment</span></div></router-link> 
+            <a href="http://www.homeamc.cn/h5/car/auth"><div class="pay"><img src="../../assets/img/my/图标_停车缴费@2x.png" alt=""><span>停车缴费</span><br><span>parking payment</span></div></a> 
             <router-link to="/Coupon"><div class="coupon"><div><img src="../../assets/img/my/图标_优惠券@2x.png" alt=""></div><div><span>优惠券</span><br><span>coupon</span></div></div></router-link>
             <router-link to="/Join"><div class="card"><img src="../../assets/img/my/图标_会员卡@21x.png" alt=""><span>会员卡</span><br><span>membership card</span></div></router-link>
             <router-link to="/Systemsettings"><div class="settings"><img src="../../assets/img/my/图标_设置@2x.png" alt=""><span>设置</span><br><span>settings</span></div></router-link>
@@ -66,12 +66,34 @@ export default {
         document.body.scrollTop = 0
         document.documentElement.scrollTop = 0
 
-        this.huoquxx()
-        if(this.$storage.getStore('vip')){
-            this.vip_name = this.$storage.getStore('vip').name
-        }
+            this.huoquxx()
 
-        this.$axios.post(this.$httpUrl.getBalance,$.param({ access_type:'WXH5', wxh:wxhs, openId:openId}))
+            this.$axios.post(this.$httpUrl.getInfo, $.param({ access_type: 'WXH5', wxh: this.$storage.getStore('wx'), openId: this.$storage.getStore('openIds') }))
+            .then(response => {
+                // console.log(response.data)
+                if (response.data.code == 200) {
+                    this.$storage.setStore('vip', response.data.data[0])
+                    this.vip_name = response.data.data[0].name
+                } else {
+                    this.$vux.loading.show({
+                        text: response.data.message
+                    })
+                    setTimeout(() => {
+                        this.$vux.loading.hide()
+                    }, 3000)
+                }
+            })
+            .catch(error => {
+                // console.log(error)
+                this.$vux.loading.show({
+                    text: '服务器异常'
+                })
+                setTimeout(() => {
+                    this.$vux.loading.hide()
+                }, 3000)
+            })
+
+        this.$axios.post(this.$httpUrl.getBalance,$.param({ access_type:'WXH5', wxh: this.$storage.getStore('wx'), openId: this.$storage.getStore('openIds')}))
             .then(response => {
                 // console.log(response.data)
                 if (response.data.code == 200) {
@@ -94,16 +116,17 @@ export default {
                     this.$vux.loading.hide()
                 }, 3000)
             })
+        
     },
     methods: {
         huoquxx(){
             // console.log(this.openId+'---------')
-            this.$axios.post(this.$httpUrl.user,$.param({ access_type:'WXH5', wxh:wxhs, openId:openId}))
+            this.$axios.post(this.$httpUrl.user,$.param({ access_type:'WXH5', wxh: this.$storage.getStore('wx'), openId: this.$storage.getStore('openIds')}))
             .then(response => {
                 // console.log(response.data)
                 if (response.data.code == 200) {
-                    this.data = response.data.data
-                    this.$storage.setStore('user',response.data.data)
+                    this.data = response.data.data.user
+                    this.$storage.setStore('user',response.data.data.user)
                 } else {
                     this.$vux.loading.show({
                         text: response.data.message
@@ -124,7 +147,7 @@ export default {
             })
         },
         Sign(){
-            this.$axios.post(this.$httpUrl.addIntegration,$.param({access_type:'WXH5', wxh:wxhs, openId:openId, type:2 }))
+            this.$axios.post(this.$httpUrl.addIntegration,$.param({access_type:'WXH5', wxh: this.$storage.getStore('wx'), openId: this.$storage.getStore('openIds'), type:2 }))
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.code == 200) {
@@ -226,9 +249,9 @@ nav{
         div:nth-child(2){ text-align: left; padding-top: 7vw;}
         
     }
-    .img{width: 53%; height: 38%; margin: 2vw 26% 0 26%;}
+    .img{width: 53%; height: 40%; margin: 2vw 26% 0 26%;}
     .card{
-        width: 32%; height: 50%; float: left; margin-left: 3%; margin-top: 3%;
+        width: 32%; height: 50%; float: left; margin-left: 3%; margin-top: 3%; line-height: 5vw;
         background: url("../../assets/img/my/背景图_会员卡@2x.png") no-repeat; background-size: 100% 100%; 
         img{.img;}
     }

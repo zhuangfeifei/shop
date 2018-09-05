@@ -13,35 +13,26 @@
             <div class="integral_class" @click="class_change"><span :class="{checked:show}">积分明细</span><span :class="{checked:!show}">积分规则</span></div>
             <div class="integral_bottom"><div :class="{back_color:show}"></div><div :class="{back_color:!show}"></div></div>
             <div v-if="show" class="integral_content">
-                <!--<div class="add_reduce">
-                    <div><span>消耗积分</span><br><span class="date">2018.01.01</span></div>
-                    <div><span>停车时长</span></div>
-                    <div><span>-30</span></div>
+                <div class="add_reduce" v-for="(item,index) in list" :key="index">
+                    <div v-if="item"><span>{{item.remark}}</span><br><span class="date">{{item.operatime}}</span></div>
+                    <!--<div><span>停车时长</span></div>-->
+                    <div v-if="item"><span>{{item.changed}}</span></div>
                 </div>
-                <div class="add_reduce">
-                    <div><span>赚取积分</span><br><span class="date">2018.01.01</span></div>
-                    <div><span>店里消费</span></div>
-                    <div><span>+30</span></div>
-                </div>-->
             </div>
-            <div v-else class="integral_content content">
+            <div v-else class="integral_content regulations_content">
                 <!--<p>积分获取来源</p>
                 <ol>
                     <li>每天签到领取相应积分。</li>
                     <li>购买商品领取相应积分。</li>
                     <li>参加会员活动领取相应积分。</li>
                     <li>会员消费扫码获取固定积分。</li>
-                </ol>
-                <p>积分规则</p>
-                <ol>
-                    <li>1元=100积分，即购买1元商品赠送100积分。</li>
-                    <li>签到一次赠送10积分，连续签到7天后每次赠送20积分。</li>
-                    <li>会员扫码增加20积分。</li>
                 </ol>-->
+                <p>积分规则</p>
+                <div class="regulations" v-html="this.$store.state.html"></div>
             </div>
         </div>
 
-        <button v-show="show" class="btn">积分兑换</button>
+        <!--<button v-show="show" class="btn">积分兑换</button>-->
         
     </div>
 
@@ -54,13 +45,46 @@ import { Loading, XButton} from 'vux'
 		name: "loginpassword-item",
         data(){
             return{
-                Data:'',show:true,integral:''
+                Data:'',show:true,integral:'',regulation:'',list:''
             }
         },
         created(){
             if(this.$storage.getStore('user')){
                 this.integral = this.$storage.getStore('user')
             }
+            this.$axios.post(this.$httpUrl.user,$.param({ access_type:'WXH5', wxh: this.$storage.getStore('wx'), openId: this.$storage.getStore('openIds')}))
+            .then(response => {
+                // console.log(response.data)
+                if(response.data.code == 200){
+                    this.regulations = response.data.data.card[0]
+                    this.$store.commit('html',this.regulations.integralRules)
+                }
+            })
+            .catch(error => {
+                // console.log(error)
+                this.$vux.loading.show({
+                    text: '服务器异常'
+                })
+                setTimeout(() => {
+                    this.$vux.loading.hide()
+                }, 3000)
+            })
+            this.$axios.post(this.$httpUrl.getIntegralHis,$.param({ access_type:'WXH5', wxh: this.$storage.getStore('wx'), openId: this.$storage.getStore('openIds'),current: 1, limit: 100}))
+            .then(response => {
+                // console.log(response.data)
+                if(response.data.code == 200){
+                    this.list = response.data.data
+                }
+            })
+            .catch(error => {
+                // console.log(error)
+                this.$vux.loading.show({
+                    text: '服务器异常'
+                })
+                setTimeout(() => {
+                    this.$vux.loading.hide()
+                }, 3000)
+            })
         },
         methods: {
             history() {
@@ -134,7 +158,7 @@ import { Loading, XButton} from 'vux'
         width: 100%; border-top: 3vw solid gainsboro; .font2;
         .add_reduce{
             width: 90%; height: 19vw; margin: 0 auto; display: flex; justify-content: space-between;
-            border-bottom: 0.3vw solid rgba(206,206,206,1); line-height: 5.3vw; padding-top: 4vw;
+            border-bottom: 0.3vw solid rgba(206,206,206,1); line-height: 5.3vw; padding-top: 4vw; padding-right: 5vw;
             .date{
                 color:rgba(128,128,128,1); font-size: 3.3vw;
             }
@@ -143,12 +167,16 @@ import { Loading, XButton} from 'vux'
     .checked{
         color:rgba(255,139,75,1);
     }
-    .content{
+    .regulations_content{
         padding-left: 5%; padding-top: 5vw;
         p{ .font1; color:rgba(26,26,26,1); }
         ol{margin-bottom: 5vw; padding: 0 5vw;}
         li{.font2; color:rgba(128,128,128,1); list-style: decimal; }
     }
+}
+
+.regulations{
+    width: 100%; min-height: 10vh; padding-right: 4vw;
 }
 
 .btn{

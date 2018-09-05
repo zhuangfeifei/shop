@@ -18,6 +18,8 @@
                     <span>{{item.CREATE_TIME.substring(5,10)}}</span>
                 </div>
                 <div class="content">
+                    {{item.CONTENT}}
+                    <br/>
                     {{item.CREATE_TIME}}
                 </div>
             </div>

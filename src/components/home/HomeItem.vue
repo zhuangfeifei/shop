@@ -1,7 +1,7 @@
 <template>
     <div class="homes">
 		<div class="daohang">
-            <header>
+            <!--<header>
                 <img src="../../assets/img/home/sousuo.png" alt="">
                 <div>
                     <span>PUMAN</span> <span @click="opstion">苏州</span> 
@@ -10,23 +10,23 @@
                 <router-link to="/Shoppingcart">
                     <img src="../../assets/img/home/shop.png" alt="">
                 </router-link>
-            </header>
+            </header>-->
             
             
             <div class="imgss">
                 <div class="lunbos">
-                    <swiper :options="swiperOption" ref="mySwiper">
-                        <!--<swiper-slide v-for="(image, index) in 4" :key="index">
-                            <a :href="image.url">
-                                <img class="imgs" src="../../assets/img/home/vip_top.png" />
-                            </a>
-                        </swiper-slide>-->
+                    <!--<swiper ref="mySwiper">
                         <swiper-slide v-for="(image, index) in data" :key="index">
                             <a :href="image.url">
                                 <img class="imgs" :src="imgUrl +image.picture" />
                             </a>
                         </swiper-slide>
-                    </swiper>
+                    </swiper>-->
+                    <van-swipe :autoplay="3000" class="ban">
+                        <van-swipe-item v-for="(image, index) in data" :key="index">
+                            <img class="los" :src="imgUrl +image.picture" />
+                        </van-swipe-item>
+                    </van-swipe>
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
                 <!--<span>全新铺满商城  期待您的光临！</span>-->
             </div>
 
-            <a href="http://www.yfcanshi.com/wx/home/index.html"><img id="yfcanshi" src="../../assets/img/home/Life.png" alt=""></a>
+            <a href="http://h5.yfcanshi.com/home"><img id="yfcanshi" src="../../assets/img/home/Life.png" alt=""></a>
 
             <router-link to="/game"><img id="kupao" src="../../assets/img/home/小兔快跑2@2x.png" alt=""></router-link>
 
@@ -84,6 +84,7 @@
                     <p>精品商店   一手掌握</p>
                     <div v-for="(item,index) in datanew" :key="index">
                         <img @click="Jingxuan(index)" v-lazy="imgUrl + item.cover" >
+                        <p>{{item.SHOP_NAME}}</p>
                     </div>
                 </div>
             </div>
@@ -100,7 +101,7 @@ import { Loading } from 'vux'
 export default {
     data(){
         return{
-            imgUrl:'',data:'',datanew:'',fenleis:'',currents:1,limit:10,loading:false,dibu:1,allNotice:'',
+            imgUrl:'',data:'',datanew:'',fenleis:'',currents:1,limit:100,loading:false,dibu:1,allNotice:'',
             active: 0,time:['00','00','00'],timeInterval:'',
             back:[
                 require('../../assets/img/home/kuang1.png'),require('../../assets/img/home/kuang2.png'),
@@ -109,40 +110,42 @@ export default {
             ],
             list:[
                 {a:[{name:'vip_name4',shop:'苏桃李音乐酒馆',img:require('../../assets/img/home/vip_name4.png'),},
-                {name:'vip_name1',shop:'苏浙徽农家大院',img:require('../../assets/img/home/vip_name1.png')},
-                {name:'vip_name5',shop:'英派斯健身',img:require('../../assets/img/home/vip_name5.png')},
-                {name:'vip_name9',shop:'江南正一堂',img:require('../../assets/img/home/vip_name9.png')},
-                // {name:'vip_name6',shop:'福田家国际月子会所',img:require('../../assets/img/home/vip_name6.png')},
-                {name:'vip_name7',shop:'瑶池丽水温泉会馆',img:require('../../assets/img/home/vip_name7.png')},
-                {name:'vip_name8',shop:'肯幸顿酒庄',img:require('../../assets/img/home/vip_name8.png')}]},
+                    {name:'vip_name1',shop:'苏浙徽农家大院',img:require('../../assets/img/home/vip_name1.png')},
+                    {name:'vip_name5',shop:'英派斯健身',img:require('../../assets/img/home/vip_name5.png')},
+                    {name:'vip_name9',shop:'江南正一堂',img:require('../../assets/img/home/vip_name9.png')},
+                    // {name:'vip_name6',shop:'福田家国际月子会所',img:require('../../assets/img/home/vip_name6.png')},
+                    {name:'vip_name7',shop:'瑶池丽水温泉会馆',img:require('../../assets/img/home/vip_name7.png')},
+                    {name:'vip_name8',shop:'肯幸顿酒庄',img:require('../../assets/img/home/vip_name8.png')}
+                ]},
                 {a:[
-                {name:'vip_name10',shop:'老妈米线',img:require('../../assets/img/home/vip_name10.png')},
-                {name:'vip_name11',shop:'5D光影涮烤吧',img:require('../../assets/img/home/vip_name11.png')},
-                {name:'vip_name12',shop:'迈家众创',img:require('../../assets/img/home/vip_name12.png')}]}
+                    {name:'vip_name10',shop:'老妈米线',img:require('../../assets/img/home/vip_name10.png')},
+                    {name:'vip_name11',shop:'5D光影涮烤吧',img:require('../../assets/img/home/vip_name11.png')},
+                    {name:'vip_name12',shop:'迈家众创',img:require('../../assets/img/home/vip_name12.png')},
+                ]}
             ],
             xuehua:'',qwe:0,
-            swiperOption: {//以下配置不懂的，可以去swiper官网看api，链接http://www.swiper.com.cn/api/
-                autoplay:true,
-                speed:300,
-                autoplayDisableOnInteraction : false,
-                disableOnInteraction:false,
-                loop:true,
-                loopAdditionalSlides:1, //循环
-                centeredSlides : true,
-                slidesPerView:2,
-                pagination : '.swiper-pagination',
-                paginationClickable:true,
-                prevButton:'.swiper-button-prev',
-                nextButton:'.swiper-button-next',
-                onInit:function(swiper){
-                    swiper.slides[2].className="swiper-slide swiper-slide-active";//第一次打开不要动画
-                },
-                breakpoints: {
-                    400: {
-                        slidesPerView: 1,
-                    }
-                }
-            } 
+            // swiperOption: {//以下配置不懂的，可以去swiper官网看api，链接http://www.swiper.com.cn/api/
+            //     autoplay:true,
+            //     speed:300,
+            //     autoplayDisableOnInteraction : false,
+            //     disableOnInteraction:false,
+            //     loop:true,
+            //     loopAdditionalSlides:1, //循环
+            //     // centeredSlides : true,
+            //     slidesPerView:2,
+            //     pagination : '.swiper-pagination',
+            //     paginationClickable:true,
+            //     prevButton:'.swiper-button-prev',
+            //     nextButton:'.swiper-button-next',
+            //     onInit:function(swiper){
+            //         swiper.slides[2].className="swiper-slide swiper-slide-active";//第一次打开不要动画
+            //     },
+            //     breakpoints: {
+            //         400: {
+            //             slidesPerView: 1,
+            //         }
+            //     }
+            // } 
         }
     },
     components: {
@@ -197,8 +200,8 @@ export default {
                 // this.datanew.push(response.data.data[0])
                 // console.log(bubbleSort(response.data.data))
                 $(document).ready(()=>{
-                    var kuandu = 26
-                    $('.Selected').css('height',''+(kuandu * Math.ceil(response.data.data.length / 3) - 9)+'vw')
+                    var kuandu = 30
+                    $('.Selected').css('height',''+(kuandu * Math.ceil(response.data.data.length / 3) + 5)+'vw')
                 })
             }
         })
@@ -266,14 +269,15 @@ export default {
                     var list = response.data.data
                     function compare(property){
                         return function(a,b){
-                            var value1 = a[property];
-                            var value2 = b[property];
+                            var value1 = a[property]
+                            var value2 = b[property]
                             return value1 - value2;
                         }
                     }
                     var s = list.sort(compare('step'))
                     var b = s
-                    b.push(s[0])
+                    // b.push(s[0])
+                    // console.log(b)
                     this.data = b
                 }
             })
@@ -349,7 +353,14 @@ export default {
 
 
 .homes{
-    padding-bottom: 20vw; background-color: white; font-size: 4vw;
+    padding-bottom: 20vw; background-color: white; font-size: 4vw; overflow-x: hidden;
+}
+
+.ban{
+    width: 100%; height: 100%;
+}
+.los{
+    width: 100%; height: 100%;
 }
 
 header{
@@ -396,7 +407,7 @@ a{
 
 
 .daohang{
-    width: 100%; height: 75vw; padding-top: 15vw; background-color: white;
+    width: 100%; height: 58vw; background-color: white;
 }
 
 
@@ -534,12 +545,12 @@ a{
     }
     .vip_top1{ margin-top: 8vw;}
     .Selected{
-        width: 90%; margin: 0 auto; border-radius:1.5vw; box-shadow:0px 0px 16px rgba(0,0,0,0.2); font-size: 4vw; padding-top: 5vw; margin-top: 6vw;
-        p{font-family:PingFang-SC-Medium; font-weight: Medium; color:rgba(234,22,22,1); line-height: 8vw; margin-left: 3%; margin-bottom: 0;}
+        width: 90%; margin: 0 auto; border-radius:1.5vw; box-shadow:0px 0px 16px rgba(0,0,0,0.2); padding-top: 5vw; margin-top: 6vw;
+        p{font-family:PingFang-SC-Bold; font-weight: Bold;white-space:nowrap; font-weight: Medium; color:rgba(26,26,26,1); line-height: 6vw; margin-left: 3%; margin-bottom: 0;}
         div{
-            width: 25%; height: 23vw; float: left; margin-top: 3vw; background-color: #E0E0E0; border-radius: 3vw;
+            width: 30vw; height: 24vw; float: left; margin-top: 3vw; text-align: center; font-size: 3.5vw; overflow: hidden;
             img{
-                width: 100%; height: 100%; border-radius: 3vw;
+                width: 17vw; height: 17vw; border-radius: 50%;
             }
         }
     }
@@ -577,73 +588,71 @@ a{
 
 
 /*------------------------------*/
-.imgss{
-    width: 100vw; overflow-x: auto; overflow: hidden;
-}
 .lunbos{
-    width: 130%; height: 60vw; overflow: hidden; text-align: center; background-color: white; 
-    margin-left: -18vw;
+    width: 100%; height: 56vw; overflow: hidden; text-align: center;
 }
 
-.swiper-container {
-	width: 100%;
-	// margin: 35px 0;
-}
+// .swiper-container {
+// 	width: 100%;
+// }
 
-@media screen and (max-width: 400px) {
-	.swiper-container {
-		// margin: 20px 0 15px;
-        padding: 0 30vw 0 10vw;
-	}
-    .swiper-container[data-v-61ec88a6]{
-        // padding: 0 17vw 0 14vw;
-    }
-}
-@media screen and (min-width: 400px) {
-    .lunbos{
-        width: 230%; height: 60vw; overflow: hidden; text-align: center; background-color: white; margin-left: -91.5vw;
-    }
-	.swiper-container {
-		// margin: 20px 0 15px;
-        padding: 0 10vw 0 37.3vw
-	}
-    .swiper-slide img {
-        width: 100%; height: 84vw!important; border-radius: 5vw; position: relative; top: -17vw;
-        /*border-radius: 14px;*/
-        display: block;
-    }
-}
+// @media screen and (max-width: 375px) {
+// 	.swiper-container {
+//         padding: 0 18vw 0 14vw
+// 	}
+//     .swiper-container[data-v-61ec88a6]{
+//         padding: 0 17vw 0 14vw
+//     }
+// }
+// @media screen and (min-width: 376px) {
+//     .lunbos{
+//         width: 200%; height: 55vw; overflow: hidden; text-align: center; background-color: white; margin-left: -28vw;
+//     }
+// 	.swiper-container {
+//         padding: 0 10vw 0 37.3vw
+// 	}
+//     .swiper-slide img {
+//         width: 100%; height: 84vw!important; border-radius: 5vw;
+//         display: block;
+//     }
+// }
 
-.swiper-slide { 
-    /*width: 100vw!important;*/
-	-webkit-transition: transform 1.0s;
-	-moz-transition: transform 1.0s;
-	-ms-transition: transform 1.0s;
-	-o-transition: transform 1.0s;
-	-webkit-transform: scale(0.7);
-	transform: scale(0.7);
-}
+// .swiper-slide { 
+// 	-webkit-transition: transform 1.0s;
+// 	-moz-transition: transform 1.0s;
+// 	-ms-transition: transform 1.0s;
+// 	-o-transition: transform 1.0s;
+//     transition: transform 1.0s;
+// 	-webkit-transform: scale(0.7);
+//     -moz-transform: scale(0.7);
+// 	-ms-transform: scale(0.7);
+// 	-o-transform: scale(0.7);
+// 	transform: scale(0.7);
+// }
 
-.swiper-slide-active,.swiper-slide-duplicate-active {
-	// -webkit-transform: scale(1);
-	// transform: scale(1);
-}
+// .swiper-slide-active,.swiper-slide-duplicate-active {
+// 	-webkit-transform: scale(1);
+//     -moz-transform: scale(1);
+// 	-ms-transform: scale(1);
+// 	-o-transform: scale(1);
+// 	transform: scale(1);
+// }
 
-.none-effect { 
-	-webkit-transition: none;
-	-moz-transition: none;
-	-ms-transition: none;
-	-o-transition: none;
-}
+// .none-effect { 
+// 	-webkit-transition: none;
+// 	-moz-transition: none;
+// 	-ms-transition: none;
+// 	-o-transition: none;
+//     transition: none;
+// }
 
-.swiper-slide img {
-	width: 140%; height: 84vw!important; border-radius: 5vw; position: relative; top: -17vw;
-	/*border-radius: 14px;*/
-	display: block;
-}
-.swiper-container[data-v-61ec88a6]{
-    left: 0; 
-}
+// .swiper-slide img {
+// 	width: 110%; height: 55vw!important; border-radius: 5vw;
+// 	display: block;
+// }
+// .swiper-container[data-v-61ec88a6]{
+//     left: 0; 
+// }
 </style>
 
 

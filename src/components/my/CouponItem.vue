@@ -66,7 +66,7 @@
         },
         methods: {
             history() {
-                history.go(-1)
+                this.$router.push({path:'/Join'})
             },
             chan(keyWords){
                 // console.log(keyWords)
@@ -135,7 +135,7 @@
                             var end = new Date(shopCoupons[i].limitDateEnd.replace(/-/g, "/")).getTime()/1000
                             var coupons = {
                                 id: shopCoupons[i].id,
-                                name: shopCoupons[i].shopName,
+                                name: shopCoupons[i].title,
                                 origin_condition: shopCoupons[i].conditionPice*100,
                                 denominations: shopCoupons[i].discount*100,
                                 value: shopCoupons[i].discount*100,

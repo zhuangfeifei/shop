@@ -8,18 +8,9 @@
             </div>
         </nav>
         
-        <!--<div class="juan">
-             <div class="ka">
-                <div class="yuan">FYL</div>
-                <div>
-                    <p>方圆里</p>
-                    <p>VIP会员</p>
-                </div>
-             </div>
-        </div>-->
 
         <div class="logo">
-            <img src="../../assets/img/my/logo@2x.png" alt="">
+            <img src="../../assets/img/my/fyl.png" alt="">
         </div>
         
         <div class="shouji">
@@ -107,30 +98,6 @@
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.code == 200) {
-                        this.addIntegration()
-                    } else {
-                        this.$vux.loading.show({
-                            text: response.data.message
-                        })
-                        setTimeout(() => {
-                            this.$vux.loading.hide()
-                        }, 3000)
-                    }
-                })
-                .catch(error => {
-                    this.$vux.loading.show({
-                            text: '服务器异常'
-                        })
-                        setTimeout(() => {
-                            this.$vux.loading.hide()
-                        }, 3000)
-                })
-            },
-            addIntegration(){
-                this.$axios.post(this.$httpUrl.addIntegration,$.param({access_type:'WXH5', wxh:wxhs, openId:openId, type:1 }))
-                .then(response => {
-                    // console.log(response.data)
-                    if (response.data.code == 200) {
                         this.$vux.toast.show({
                             text: '开卡成功'
                         })
@@ -155,7 +122,7 @@
                             this.$vux.loading.hide()
                         }, 3000)
                 })
-            }
+            },
         }
 	}
 </script>
@@ -194,7 +161,7 @@
 
 
 .logo{
-    width: 20vw; height: 20vw; margin: 10vw auto; border-radius: 50%; background: rgba(206,206,206,1);
+    width: 37vw; height: 13vw; margin: 10vw auto;
     img{
         width: 100%; height: 100%;
     }

@@ -66,6 +66,7 @@ import Join from '@/my/Join'
 import Opencard from '@/my/Opencard'
 // 优惠卷详情
 import Detailscoupond from '@/my/Detailscoupond'
+import Rights from '@/components/my/Rights'
 
 import layer from '@/components/home/layer'
 import shop from '@/components/home/shop'
@@ -256,6 +257,11 @@ export default new Router({
             name: "Notice",
             path: '/Notice',
             component: Notice 
+        },
+        { //
+            name: "Rights",
+            path: '/Rights',
+            component: Rights 
         },
     ]
 })

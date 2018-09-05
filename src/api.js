@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from './vuex/store'
 
-let localhostDev = true
+let localhostDev = false
 let host = localhostDev ? '/Shop' : 'http://www.homeamc.cn'
 
 const api = axios.create();
@@ -11,7 +11,7 @@ api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 api.interceptors.request.use(function (config) {
     // console.log(config)
     // 在发送请求之前做些什么
-    store.commit('SET_LOADING',true)
+    // store.commit('SET_LOADING',true)
 
     return config
 
@@ -165,6 +165,8 @@ let httpUrl = {
     'addCustomerCard': host + '/shopping/api/card/addCustomerCard',         // 绑定会员卡
 
     'addIntegration': host + '/shopping/api/card/addIntegration',           // 积分
+    'getIllege': host + '/shopping/api/card/getIllege',           // 积分
+    'getIntegralHis': host + '/shopping/api/card/getIntegralHis',           // 积分
 
     'allNotice': host + '/shopping/notice/allNotice',                       // 获取所有的已读及未读通知
 

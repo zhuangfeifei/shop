@@ -20,7 +20,7 @@
                 <div class="vip_class">
                     <p><span>会员等级</span><span>{{vip_card.name}}</span></p>
                     <div><span></span><span></span><span></span></div>
-                    <div><span>普通会员</span><span>钻石会员</span></div>
+                    <div><span>普通会员</span><span>黑金会员</span></div>
                 </div>
                 <p class="code" v-if="vip_card">NO：{{vip_card.cardno | filter}}</p>
             </div>
@@ -31,14 +31,14 @@
                 <div v-for="(item,index) in vips" :key="index" :style="{ 'background-image': 'url(' + item.img + ')','background-repeat':'no-repeat','background-size':'100% 100%' }">
                     <span @click="show_regulations(index)" v-if="index == 0">{{item.name}}</span>
                     <span @click="show_regulations(index)" v-if="index == 1">{{item.name}}</span>
-                    <router-link v-if="index == 2 || index == 3" :to="item.url">{{item.name}}</router-link>
+                    <span @click="show_regulations1(index)" v-if="index == 2">{{item.name}}</span>
+                    <router-link v-if="index == 3" :to="item.url">{{item.name}}</router-link>
                     <a v-if="index == 4" :href='"tel:"+vip_card.telnumber'>{{item.name}}</a>
                 </div>
             </div>
         </div>
 
         <van-popup class="QR" v-model="show"><div class="QR_codes"><p>会员码</p><div id="qrcode"></div></div></van-popup>
-        <van-popup v-model="show1" position="right" id="cont_html"><div v-html="content" class="cont"></div></van-popup>
         
     </div>
 
@@ -66,24 +66,74 @@
                     {name:'积分商城',img:require("../../assets/img/my/背景图_积分商城@2x.png"),url:'/Integralshop'},
                     {name:'联系客服',img:require("../../assets/img/my/背景图_联系客服@2x.png"),tel:''}
                 ],
-                vip_card:'',vipcode:'',user:'',show:false,show1:false,content:''
+                vip_card:'',vipcode:'',user:'',show:false,show1:false,content:'',vip_cont:''
             }
         },
         created(){
-            this.user = this.$storage.getStore('user')
-            if(this.$storage.getStore('user').phonenumber != ''){
-                this.vip()
-            }
+
+            document.body.scrollTop = 0
+            document.documentElement.scrollTop = 0
+
+            this.$axios.post(this.$httpUrl.user,$.param({ access_type:'WXH5', wxh: this.$storage.getStore('wx'), openId: this.$storage.getStore('openIds')}))
+            .then(response => {
+                // console.log(response.data)
+                if (response.data.code == 200) {
+                    this.$storage.setStore('user',response.data.data.user)
+                    this.user = response.data.data.user
+                    if(this.user.phonenumber != '') this.vip()
+                } else {
+                    this.$vux.loading.show({
+                        text: response.data.message
+                    })
+                    setTimeout(() => {
+                        this.$vux.loading.hide()
+                    }, 3000)
+                }
+            })
+            .catch(error => {
+                // console.log(error)
+                this.$vux.loading.show({
+                    text: '服务器异常'
+                })
+                setTimeout(() => {
+                    this.$vux.loading.hide()
+                }, 3000)
+            })
+            this.$axios.post(this.$httpUrl.getIllege)
+            .then(response => {
+                // console.log(response.data)
+                if (response.data.code == 200) {
+                    this.vip_cont = response.data.data
+                } else {
+                    this.$vux.loading.show({
+                        text: response.data.message
+                    })
+                    setTimeout(() => {
+                        this.$vux.loading.hide()
+                    }, 3000)
+                }
+            })
+            .catch(error => {
+                // console.log(error)
+                this.$vux.loading.show({
+                    text: '服务器异常'
+                })
+                setTimeout(() => {
+                    this.$vux.loading.hide()
+                }, 3000)
+            })
+            
+            
         },
         methods: {
             history() {
-                history.go(-1)
+                this.$router.push({path:'/My'})
             },
             qrcodes(){
                 this.show = !this.show
             },
             vip(){
-                this.$axios.post(this.$httpUrl.getInfo,$.param({ access_type:'WXH5', wxh:wxhs, openId:openId }))
+                this.$axios.post(this.$httpUrl.getInfo,$.param({ access_type:'WXH5', wxh: this.$storage.getStore('wx'), openId: this.$storage.getStore('openIds') }))
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.code == 200) {
@@ -117,12 +167,19 @@
                 })
             },
             show_regulations(index){
-                // this.show1 = !this.show1
-                // if(index == 0){
-                //     this.content = this.vip_card.equity.replace(/;/g,'').replace(/&gt/g,'>').replace(/&lt/g,'<').replace(/&apos/g,"'").replace(/&quot/g,"\\")
-                // }else{
-                //     this.content = this.vip_card.discount
-                // }
+                this.show1 = !this.show1
+                if(index == 0){
+                    this.vip_cont = this.vip_card.equity
+                    this.$store.commit('html', this.vip_card.equity)
+                    this.$router.push({path:'/Rights', query:{ title:'会员权益'}})
+                }else{
+                    this.vip_cont = this.vip_card.remarks
+                    this.$store.commit('html', this.vip_card.remarks)
+                    this.$router.push({path:'/Rights', query:{ title:'会员折扣'}})
+                }
+            },
+            show_regulations1(){
+                if(this.user.phonenumber != '') this.$router.push({path:'/Membership'})
             }
         },
         filters:{
@@ -229,7 +286,7 @@
 
 
 .footer{
-    width: 100%; height: 56vh; margin-top: -8vw; padding-top: 15vw; font-size: 4.5vw;
+    width: 100%; height: 56vh; margin-top: -5vw; padding-top: 15vw; font-size: 4.5vw;
     background: url("../../assets/img/my/背景图_会员卡_圆弧@2x.png") no-repeat; background-size: 100% 100%;
     .foo{
         width: 92%; height: 90%; margin-left: 4%;

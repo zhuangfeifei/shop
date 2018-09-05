@@ -120,7 +120,7 @@
 import Header from "./Header"
 import { Rater } from 'vux'
 import { TransferDom, Actionsheet, Group, XSwitch } from 'vux'
-import { Toast } from 'vant';
+import { Toast } from 'vant'
 export default {
     data(){
         return{
